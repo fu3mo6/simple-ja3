@@ -235,7 +235,7 @@ char* clienthello_parse_ja3(const u_int8_t *pkt, u_int16_t len, size_t caplen)
 
     if (tls_rec->ctype != SSL_ID_HANDSHAKE)
         return NULL;
-    if (ntohs(tls_rec->ver) & SSLV3_VERSION != SSLV3_VERSION)
+    if ((ntohs(tls_rec->ver) & SSLV3_VERSION) != SSLV3_VERSION)
         return NULL;
 
     tls_handshake = (const struct TLS_HANDSHAKE_HEADER *)(pkt+offset);
@@ -318,7 +318,7 @@ char* serverhello_parse_ja3s(const u_int8_t *pkt, u_int16_t len, size_t caplen)
     int offset = 0;
     ja3_result_t result = {0};
 
-    if(NULL == result || caplen < sizeof(*tls_rec))
+    if(caplen < sizeof(*tls_rec))
         return NULL;
 
     tls_rec = (const struct TLS_RECORD *)(pkt+offset);
@@ -326,7 +326,7 @@ char* serverhello_parse_ja3s(const u_int8_t *pkt, u_int16_t len, size_t caplen)
 
     if (tls_rec->ctype != SSL_ID_HANDSHAKE)
         return NULL;
-    if (ntohs(tls_rec->ver) & SSLV3_VERSION != SSLV3_VERSION)
+    if ((ntohs(tls_rec->ver) & SSLV3_VERSION) != SSLV3_VERSION)
         return NULL;
 
     tls_handshake = (const struct TLS_HANDSHAKE_HEADER *)(pkt+offset);
