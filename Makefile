@@ -20,7 +20,7 @@ CFLAGS += -Werror
 
 LDFLAGS += -lpcap
 
-EXES = a.out
+EXES = ja3_parser
 
 .PHONY: build clean
 
